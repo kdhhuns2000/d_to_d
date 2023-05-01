@@ -38,6 +38,7 @@ dependencies:
   flutter_riverpod: ^2.3.6
   responsive_grid_list: ^1.3.2
   paginated_search_bar: ^1.1.2
+  go_router: ^7.0.0
 
 dev_dependencies:
   flutter_test:

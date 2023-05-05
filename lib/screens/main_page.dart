@@ -1,8 +1,24 @@
+import 'package:d_to_d/screens/setting/setting_page.dart';
+import 'package:d_to_d/widgets/bottom_navigation_widget.dart';
 import 'package:d_to_d/widgets/main_widgets/main_body.dart';
 import 'package:d_to_d/widgets/main_widgets/search_bar.dart';
 import 'package:d_to_d/widgets/main_widgets/side_bar.dart';
 import 'package:d_to_d/widgets/responsive/responsive_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+final _bottomNavController = StateNotifierProvider<BottomNavController, int>(
+    (ref) => BottomNavController(0));
+
+class BottomNavController extends StateNotifier<int> {
+  BottomNavController(super.state);
+
+  void setPosition(int value) {
+    state = value;
+  }
+}
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -172,7 +188,8 @@ class Mobile extends StatelessWidget {
           )
         ],
       ),
-      body: MainBody(),
+      body: widget.child,
+      bottomNavigationBar: BottomNavigationWidget(),
     );
   }
 }

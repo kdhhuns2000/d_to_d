@@ -1,3 +1,4 @@
+import 'package:d_to_d/widgets/home/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:d_to_d/screens/setting/setting_page.dart';
@@ -11,24 +12,33 @@ class AppRouter {
       GlobalKey<NavigatorState>();
 
   static final GoRouter _router = GoRouter(
+    initialLocation: '/home',
     navigatorKey: _rootNavigatorKey,
-    routes: <RouteBase>[
-      GoRoute(
-        path: '/',
-        builder: (context, state) => MainPage(key: state.pageKey),
+    routes: [
+      ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        builder: (context, state, child) => MainPage(
+          child: child,
+        ),
+        routes: [
+          GoRoute(
+            path: '/home',
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: HomeBody(),
+            ),
+          ),
+          GoRoute(
+            path: '/setting',
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: SettingPage(),
+            ),
+          )
+        ],
       ),
-      // ShellRoute(
-      //   navigatorKey: _shellNavigatorKey,
-      //   builder: (context, state, child) => ,),
-      // )
       GoRoute(
         path: '/login',
         builder: (context, state) => Login(),
       ),
-      GoRoute(
-        path: '/setting',
-        builder: (context, state) => SettingPage(key: state.pageKey),
-      )
     ],
   );
 

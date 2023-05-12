@@ -8,19 +8,19 @@ class ExampleItem {
   });
 }
 
-class SearchBar extends StatefulWidget {
-  const SearchBar({super.key});
+class HomeSearchBar extends StatefulWidget {
+  const HomeSearchBar({super.key});
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<HomeSearchBar> createState() => _HomeSearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _HomeSearchBarState extends State<HomeSearchBar> {
   final TextEditingController _filter = TextEditingController();
   FocusNode focusNode = FocusNode();
   String _searchText = "";
 
-  _SearchBarState() {
+  _HomeSearchBarState() {
     _filter.addListener(() {
       setState(() {
         _searchText = _filter.text;

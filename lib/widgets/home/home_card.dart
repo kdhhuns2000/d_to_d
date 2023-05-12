@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MainCard extends StatelessWidget {
+class HomeCard extends StatelessWidget {
   final int id;
   final String title, type, name, imgURL;
 
-  MainCard(
+  HomeCard(
       {super.key,
       required this.id,
       required this.title,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:d_to_d/widgets/home/home_body.dart';
-import 'package:d_to_d/widgets/home/search_bar.dart';
 import 'package:d_to_d/widgets/home/side_bar.dart';
 
 class DesktopLayout extends StatelessWidget {

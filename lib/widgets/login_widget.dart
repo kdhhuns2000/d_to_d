@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class LoginWidget extends StatelessWidget {
+class LoginWidget extends StatefulWidget {
   const LoginWidget({
     super.key,
   });
 
+  @override
+  State<LoginWidget> createState() => _LoginWidgetState();
+}
+
+class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -14,7 +20,7 @@ class LoginWidget extends StatelessWidget {
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: () => {},
+              onPressed: () => _onLogin(),
               style: ElevatedButton.styleFrom(
                   minimumSize: Size.fromHeight(50),
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -44,5 +50,9 @@ class LoginWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onLogin() {
+    context.go('/home');
   }
 }

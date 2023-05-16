@@ -1,10 +1,10 @@
-import 'package:d_to_d/widgets/main_widgets/main_card.dart';
+import 'package:d_to_d/widgets/home/home_card.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
 import 'package:flutter/material.dart';
 
-class MainBody extends StatelessWidget {
-  const MainBody({super.key});
+class HomeBody extends StatelessWidget {
+  const HomeBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class MainBody extends StatelessWidget {
         minItemWidth: 300,
         children: List.generate(
           100,
-          (index) => MainCard(
+          (index) => HomeCard(
               id: index,
               title: "같이 코딩할 사람",
               type: "Designer",

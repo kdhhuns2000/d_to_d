@@ -1,27 +1,27 @@
+import 'package:d_to_d/widgets/login/login_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:d_to_d/widgets/login_widget.dart';
+import 'package:d_to_d/widgets/login/desktop_login_button.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class DesktopLogin extends StatelessWidget {
+  const DesktopLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Row(
         children: [
           Flexible(
             fit: FlexFit.tight,
             child: Container(
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/bg_developer.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              width: double.infinity,
-              alignment: Alignment.bottomLeft,
+                  image: DecorationImage(
+                image: AssetImage('assets/images/bg_developer.jpg'),
+                fit: BoxFit.cover,
+              )),
+              height: double.infinity,
+              alignment: Alignment.topCenter,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(80.0),
                 child: Text(
                   'Developer',
                   style: TextStyle(
@@ -37,7 +37,7 @@ class Login extends StatelessWidget {
           Flexible(
             fit: FlexFit.tight,
             child: Stack(
-              alignment: Alignment.center,
+              alignment: Alignment.topRight,
               children: [
                 Container(
                   decoration: BoxDecoration(
@@ -46,10 +46,10 @@ class Login extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  width: double.infinity,
-                  alignment: Alignment.topRight,
+                  height: double.infinity,
+                  alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(80.0),
                     child: Text(
                       'Designer',
                       style: TextStyle(
@@ -61,7 +61,19 @@ class Login extends StatelessWidget {
                     ),
                   ),
                 ),
-                LoginWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 24.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      DesktopLoginButton(location: 'Login'),
+                      DesktopLoginButton(location: 'Sign in')
+                    ],
+                  ),
+                )
               ],
             ),
           ),

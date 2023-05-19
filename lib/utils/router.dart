@@ -1,9 +1,10 @@
+import 'package:d_to_d/screens/login/login_page.dart';
 import 'package:d_to_d/widgets/home/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:d_to_d/screens/setting/setting_page.dart';
 import 'package:d_to_d/screens/main_page.dart';
-import 'package:d_to_d/screens/login/login.dart';
+import 'package:d_to_d/screens/login/mobile_login.dart';
 import 'package:d_to_d/screens/add_post/add_post_page.dart';
 
 class AppRouter {
@@ -18,7 +19,7 @@ class AppRouter {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => Login(),
+        builder: (context, state) => LoginPage(),
       ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,

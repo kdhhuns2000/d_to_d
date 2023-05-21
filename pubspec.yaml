@@ -112,26 +112,40 @@ flutter:
           weight: 700
         - asset: assets/fonts/NotoSansKR/NotoSansKR-Black.otf
           weight: 900
-    - family: Inter
+    - family: Roboto
       fonts:
-        - asset: assets/fonts/Inter/Inter-Thin.ttf
+        - asset: assets/fonts/Roboto/Roboto-Thin.ttf
           weight: 100
-        - asset: assets/fonts/Inter/Inter-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Inter/Inter-Light.ttf
+        - asset: assets/fonts/Roboto/Roboto-Light.ttf
           weight: 300
-        - asset: assets/fonts/Inter/Inter-Regular.ttf
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Inter/Inter-Medium.ttf
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Inter/Inter-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Inter/Inter-Bold.ttf
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Inter/Inter-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/Inter/Inter-Black.ttf
-          weight: 900
+        - asset: assets/fonts/Roboto/Roboto-Black.ttf
+          weight: 900        
+    # - family: Inter
+    #   fonts:
+    #     - asset: assets/fonts/Inter/Inter-Thin.ttf
+    #       weight: 100
+    #     - asset: assets/fonts/Inter/Inter-ExtraLight.ttf
+    #       weight: 200
+    #     - asset: assets/fonts/Inter/Inter-Light.ttf
+    #       weight: 300
+    #     - asset: assets/fonts/Inter/Inter-Regular.ttf
+    #       weight: 400
+    #     - asset: assets/fonts/Inter/Inter-Medium.ttf
+    #       weight: 500
+    #     - asset: assets/fonts/Inter/Inter-SemiBold.ttf
+    #       weight: 600
+    #     - asset: assets/fonts/Inter/Inter-Bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/Inter/Inter-ExtraBold.ttf
+    #       weight: 800
+    #     - asset: assets/fonts/Inter/Inter-Black.ttf
+    #       weight: 900
     - family: SettingIcon
       fonts:
         - asset: assets/fonts/SettingIcon.ttf

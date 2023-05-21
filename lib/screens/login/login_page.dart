@@ -14,7 +14,6 @@ class LoginPage extends StatelessWidget {
           Expanded(
             child: ResponsiveLayout(
               mobileBody: MobileLogin(),
-              tabletBody: Container(),
               desktopBody: DesktopLogin(),
             ),
           ),

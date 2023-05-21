@@ -29,9 +29,9 @@ class MainPage extends StatelessWidget {
               mobileBody: MobileLayout(
                 child: child,
               ),
-              tabletBody: TabletLayout(
-                child: child,
-              ),
+              // tabletBody: TabletLayout(
+              //   child: child,
+              // ),
               desktopBody: DesktopLayout(
                 child: child,
               ),

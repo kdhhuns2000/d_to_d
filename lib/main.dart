@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'DtoD',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Inter'),
+      theme: ThemeData(fontFamily: 'NotoSansKR'),
       // home: Login(),
       routeInformationProvider: AppRouter.router.routeInformationProvider,
       routeInformationParser: AppRouter.router.routeInformationParser,

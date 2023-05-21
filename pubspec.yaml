@@ -98,6 +98,20 @@ flutter:
           weight: 700
         - asset: assets/fonts/NotoSerifKR/NotoSerifKR-Black.otf
           weight: 900
+    - family: NotoSansKR
+      fonts:
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Thin.otf
+          weight: 100
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Light.otf
+          weight: 300
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Regular.otf
+          weight: 400
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Medium.otf
+          weight: 500
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Bold.otf
+          weight: 700
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Black.otf
+          weight: 900
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter/Inter-Thin.ttf

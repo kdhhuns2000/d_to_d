@@ -1,4 +1,5 @@
 import 'package:d_to_d/screens/login/login_page.dart';
+import 'package:d_to_d/screens/post/mobile_post.dart';
 import 'package:d_to_d/widgets/home/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -64,6 +65,12 @@ class AppRouter {
             path: '/setting',
             pageBuilder: (context, state) => NoTransitionPage(
               child: SettingPage(),
+            ),
+          ),
+          GoRoute(
+            path: '/post',
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: MobilePost(),
             ),
           ),
         ],

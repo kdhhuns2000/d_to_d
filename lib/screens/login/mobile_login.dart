@@ -3,14 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:d_to_d/widgets/login/login_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:d_to_d/utils/provider/login_state_provider.dart';
+import 'package:d_to_d/utils/provider/login_modal_state_provider.dart';
 
 class MobileLogin extends ConsumerWidget {
   const MobileLogin({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loginValue = ref.watch(loginStateProvider);
+    final loginValue = ref.watch(loginModalStateProvider);
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,

@@ -7,39 +7,39 @@ class MobileLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
+        alignment: Alignment.center,
         children: [
-          Flexible(
-            fit: FlexFit.tight,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/bg_developer.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              width: double.infinity,
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Developer',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 36.0,
-                    fontFamily: 'NotoSerifKR',
-                    fontWeight: FontWeight.w900,
+          Column(
+            children: [
+              Flexible(
+                fit: FlexFit.tight,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/bg_developer.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  width: double.infinity,
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Developer',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 36.0,
+                        fontFamily: 'NotoSerifKR',
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          Flexible(
-            fit: FlexFit.tight,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
+              Flexible(
+                fit: FlexFit.tight,
+                child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/images/bg_designer.jpg'),
@@ -61,10 +61,10 @@ class MobileLogin extends StatelessWidget {
                     ),
                   ),
                 ),
-                LoginWidget(),
-              ],
-            ),
+              ),
+            ],
           ),
+          LoginWidget(),
         ],
       ),
     );

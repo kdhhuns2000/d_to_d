@@ -21,34 +21,35 @@ class _MobilePostState extends State<MobilePost> {
           return CircularProgressIndicator();
         } else {
           Post post = snapshot.data!;
-          return ListView(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          return Column(
             children: [
-              Image.network(
-                // 'assets/images/img_setting.png',
-                post.image,
-              ),
               Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        post.title,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
+                child: ListView(
+                  children: [
+                    Image.network(
+                      post.image,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            post.title,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          const Divider(
+                            thickness: 2.0,
+                          ),
+                          Text(
+                            post.content,
+                          ),
+                        ],
                       ),
-                      const Divider(
-                        thickness: 2.0,
-                      ),
-                      Text(
-                        // '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
-                        post.content,
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -68,14 +69,12 @@ class _MobilePostState extends State<MobilePost> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          // '이한슬',
                           post.writer,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
-                          // '대학생 디자이너',
                           post.category,
                           style: TextStyle(
                             fontWeight: FontWeight.w300,

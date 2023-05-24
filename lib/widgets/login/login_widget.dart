@@ -1,58 +1,121 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:d_to_d/utils/provider/login_modal_state_provider.dart';
+import 'package:d_to_d/utils/api/service.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({
-    super.key,
-  });
+class LoginWidget extends ConsumerStatefulWidget {
+  const LoginWidget({super.key});
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginWidgetState extends ConsumerState<LoginWidget> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   final login = ref.read(loginStateProvider);
+  //   print(login);
+  // }
+
+  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _pwController = TextEditingController();
+
+  @override
+  void dispose() {
+    _idController.dispose();
+    _pwController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final loginValue = ref.watch(loginModalStateProvider);
+    final mediaWidth = MediaQuery.of(context).size.width;
+    final mediaHeight = MediaQuery.of(context).size.height;
+
     return Positioned(
-      top: MediaQuery.of(context).size.height * 0.3,
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.7,
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () => _onLogin(),
-              style: ElevatedButton.styleFrom(
-                  minimumSize: Size.fromHeight(50),
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  backgroundColor: Colors.transparent,
-                  side: BorderSide(
-                    color: Colors.white,
-                    width: 2,
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0))),
-              child: Text(
-                'Login',
-                style: TextStyle(fontSize: 16.0),
+      bottom: mediaHeight * 0.15,
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            width: mediaWidth * 0.7,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              border: Border.all(
+                width: 1.5,
+                color: Colors.white,
               ),
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                child: Text(
-                  'Sign in',
-                  style: TextStyle(color: Colors.white),
+            child: ExpansionTile(
+              title: Text(
+                'Login',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
                 ),
-                onPressed: () => {},
               ),
-            )
-          ],
-        ),
+              expandedAlignment: Alignment.center,
+              onExpansionChanged: (value) =>
+                  ref.watch(loginModalStateProvider.notifier).update(),
+              children: [
+                TextField(
+                  controller: _idController,
+                  decoration: InputDecoration(
+                    hintText: '아이디',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    fillColor: Colors.white,
+                  ),
+                ),
+                TextField(
+                  controller: _pwController,
+                  decoration: InputDecoration(
+                    hintText: '비밀번호',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () =>
+                      _onLogin(_idController.text, _pwController.text),
+                  child: Text('로그인'),
+                )
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              child: Text(
+                loginValue == true ? '' : 'Sign in',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () => {},
+            ),
+          )
+        ],
       ),
     );
   }
 
-  void _onLogin() {
-    context.go('/home');
+  Future<void> _onLogin(String id, String pw) async {
+    await Service.login(id, pw).then((response) {
+      if (response == 'Login Fail') {
+        Fluttertoast.showToast(
+          msg: '로그인 정보를 다시 확인해주세요',
+          gravity: ToastGravity.BOTTOM,
+          toastLength: Toast.LENGTH_SHORT,
+        );
+      } else {
+        context.go('/home');
+      }
+    });
   }
 }

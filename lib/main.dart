@@ -11,14 +11,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'DtoD',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'NotoSansKR'),
-      // home: Login(),
-      routeInformationProvider: AppRouter.router.routeInformationProvider,
-      routeInformationParser: AppRouter.router.routeInformationParser,
-      routerDelegate: AppRouter.router.routerDelegate,
+    return ProviderScope(
+      child: MaterialApp.router(
+        title: 'DtoD',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'NotoSansKR'),
+        // home: Login(),
+        routeInformationProvider: AppRouter.router.routeInformationProvider,
+        routeInformationParser: AppRouter.router.routeInformationParser,
+        routerDelegate: AppRouter.router.routerDelegate,
+      ),
     );
   }
 }

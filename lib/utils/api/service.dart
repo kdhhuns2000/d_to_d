@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:d_to_d/models/user.dart';
+import 'package:d_to_d/models/post.dart';
 
 class Service {
-  static var dio = Dio(
+  static final _dio = Dio(
     BaseOptions(
       baseUrl: 'http://15.165.26.250:8080/',
       connectTimeout: const Duration(seconds: 3),
@@ -12,7 +13,7 @@ class Service {
 
   static Future<String?> login(String userId, String password) async {
     try {
-      Response response = await dio.get(
+      Response response = await _dio.get(
         '/users/login',
         queryParameters: {
           'userId': userId,
@@ -34,13 +35,28 @@ class Service {
 
   static Future<User> getUser(int id) async {
     try {
-      Response response = await dio.get(
+      Response response = await _dio.get(
         '/users/profile/$id',
         options: Options(responseType: ResponseType.json),
       );
       User user = User.fromJson(response.data['result']);
-      // print(user.nickname);
       return user;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<List<Post>> getPosts() async {
+    List<Post> posts = [];
+    try {
+      Response response = await _dio.get(
+        '/posts',
+        options: Options(responseType: ResponseType.json),
+      );
+      for (var post in response.data['content']) {
+        posts.add(Post.fromJson(post));
+      }
+      return posts;
     } catch (e) {
       throw Exception(e);
     }

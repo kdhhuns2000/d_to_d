@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:d_to_d/screens/setting/setting_page.dart';
 import 'package:d_to_d/screens/main_page.dart';
-import 'package:d_to_d/screens/login/mobile_login.dart';
 import 'package:d_to_d/screens/add_post/add_post_page.dart';
 
 class AppRouter {
@@ -69,9 +68,16 @@ class AppRouter {
           ),
           GoRoute(
             path: '/post',
-            pageBuilder: (context, state) => NoTransitionPage(
-              child: MobilePost(),
-            ),
+            builder: (context, state) {
+              final postId = state.queryParameters['postid'];
+              if (postId == null) {
+                throw Exception('postId is null');
+              }
+              return MobilePost(postId: postId);
+            }
+            // pageBuilder: (context, state) => NoTransitionPage(
+            //   child: MobilePost(),
+            // ),
           ),
         ],
       ),

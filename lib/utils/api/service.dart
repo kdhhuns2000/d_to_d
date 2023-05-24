@@ -61,4 +61,17 @@ class Service {
       throw Exception(e);
     }
   }
+
+  static Future<Post> getPost(String postId) async {
+    try {
+      Response response = await _dio.get(
+        '/posts/$postId',
+        options: Options(responseType: ResponseType.json),
+      );
+      Post post = Post.fromJson(response.data['result']);
+      return post;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

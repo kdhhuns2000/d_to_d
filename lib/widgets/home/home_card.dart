@@ -16,7 +16,7 @@ class HomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.go('/post'),
+      onTap: () => context.go('/post?postid=$id'),
       child: Container(
         constraints: BoxConstraints(
           maxWidth: 360,

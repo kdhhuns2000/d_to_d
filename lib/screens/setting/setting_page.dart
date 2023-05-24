@@ -34,7 +34,7 @@ class SettingPage extends StatelessWidget {
 
 Widget settingListTile(String title, IconData icon) {
   return ListTile(
-    horizontalTitleGap: 0,
+    horizontalTitleGap: 10,
     title: Text(title),
     leading: Icon(icon),
     textColor: Colors.black,

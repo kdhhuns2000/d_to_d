@@ -3,15 +3,14 @@ import 'package:d_to_d/widgets/home/home_body.dart';
 import 'package:d_to_d/widgets/home/side_bar.dart';
 
 class DesktopLayout extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
-  const DesktopLayout({
-    super.key,
-    required this.child,
-  });
+  const DesktopLayout({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final Widget content = child ?? HomeBody();
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -29,7 +28,7 @@ class DesktopLayout extends StatelessWidget {
                 ),
               ),
             ),
-            SearchBar(),
+            // SearchBar(),
           ],
         ),
         backgroundColor: Colors.white,
@@ -50,7 +49,7 @@ class DesktopLayout extends StatelessWidget {
           ),
           Expanded(
             flex: 5,
-            child: HomeBody(),
+            child: content,
           ),
         ],
       ),

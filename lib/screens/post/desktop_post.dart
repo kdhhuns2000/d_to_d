@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+
+class DesktopPost extends StatefulWidget {
+  const DesktopPost({super.key});
+  @override
+  State<DesktopPost> createState() => _DesktopPostState();
+}
+
+class _DesktopPostState extends State<DesktopPost> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(15.0),
+          child: Container(
+            width: 446,
+            height: 436,
+            child: Image.asset(
+              'assets/images/img_setting.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '제목',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
+                ),
+                const Divider(
+                  thickness: 2.0,
+                ),
+                Text(
+                  '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.symmetric(
+                      horizontal: BorderSide(width: 0.1),
+                    ),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 12.0,
+                    horizontal: MediaQuery.of(context).size.width * 0.1,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '이한슬',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            '대학생 디자이너',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ],
+                      ),
+                      TextButton(
+                        onPressed: () => {},
+                        child: Text(
+                          'CONNECT',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

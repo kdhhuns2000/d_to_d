@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:d_to_d/models/user.dart';
 
@@ -12,7 +10,7 @@ class Service {
     ),
   );
 
-  static Future<String> login(String userId, String password) async {
+  static Future<String?> login(String userId, String password) async {
     try {
       Response response = await dio.get(
         '/users/login',
@@ -24,7 +22,7 @@ class Service {
 
       if (response.data['code'] == 200) {
         int id = response.data['result']['id'];
-        String result = await getUser(id).then((user) => user.nickname);
+        String? result = await getUser(id).then((user) => user.nickname);
         return result;
       } else {
         return 'Login Fail';
@@ -41,6 +39,7 @@ class Service {
         options: Options(responseType: ResponseType.json),
       );
       User user = User.fromJson(response.data['result']);
+      // print(user.nickname);
       return user;
     } catch (e) {
       throw Exception(e);

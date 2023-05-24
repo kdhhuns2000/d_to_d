@@ -3,7 +3,7 @@ class User {
   late String userId;
   late String password;
   late String category;
-  late String nickname;
+  String? nickname;
   String? profileImage;
   List<String>? posts;
 

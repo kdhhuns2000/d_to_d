@@ -40,7 +40,7 @@ class _DesktopPostState extends State<DesktopPost> {
                   ),
                 ),
               ),
-              SizedBox(width: 60.0), // 가운데 간격
+              SizedBox(width: mediaWidth * 0.05), // 가운데 간격
 
               Expanded(
                 child: Container(

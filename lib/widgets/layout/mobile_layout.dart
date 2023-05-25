@@ -96,8 +96,14 @@ class _MobileLayoutState extends State<MobileLayout>
       case 0:
         context.go('/home');
         break;
+      case 1:
+        context.go('/developer');
+        break;
       case 2:
-        context.go('/addpost');
+        context.push('/addpost');
+        break;
+      case 3:
+        context.go('/designer');
         break;
       case 4:
         context.go('/setting');

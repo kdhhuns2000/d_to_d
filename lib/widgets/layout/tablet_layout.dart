@@ -43,7 +43,7 @@ class TabletLayout extends StatelessWidget {
           )
         ],
       ),
-      body: HomeBody(),
+      body: child,
     );
   }
 }

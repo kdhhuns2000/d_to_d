@@ -4,8 +4,15 @@ import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:d_to_d/models/post.dart';
 import 'package:flutter/material.dart';
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends StatefulWidget {
   const HomeBody({super.key});
+
+  @override
+  State<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
+  final ScrollController _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +25,11 @@ class HomeBody extends StatelessWidget {
             return CircularProgressIndicator();
           } else {
             List<Post> posts = snapshot.data!;
-            return ResponsiveGridList(
+            return ResponsiveGridListBuilder(
               horizontalGridMargin: 20,
               verticalGridMargin: 20,
               minItemWidth: 300,
-              children: List.generate(
+              gridItems: List.generate(
                 posts.length,
                 (index) => HomeCard(
                   id: posts[index].id,
@@ -32,6 +39,29 @@ class HomeBody extends StatelessWidget {
                   imgURL: posts[index].image,
                 ),
               ),
+              builder: (context, items) {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    setState(() {});
+                  },
+                  child: ListView(
+                    physics: AlwaysScrollableScrollPhysics(
+                        parent: BouncingScrollPhysics()),
+                    children: items,
+                  ),
+                );
+              },
+              // builder: (context, items) => ,
+              // children: List.generate(
+              //   posts.length,
+              //   (index) => HomeCard(
+              //     id: posts[index].id,
+              //     title: posts[index].title,
+              //     type: posts[index].category,
+              //     name: posts[index].writer,
+              //     imgURL: posts[index].image,
+              //   ),
+              // ),
             );
           }
         },

@@ -1,7 +1,7 @@
 import 'package:d_to_d/widgets/responsive/responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:d_to_d/widgets/layout/mobile_layout.dart';
-import 'package:d_to_d/widgets/layout/tablet_layout.dart';
+// import 'package:d_to_d/widgets/layout/tablet_layout.dart';
 import 'package:d_to_d/widgets/layout/desktop_layout.dart';
 
 class MainPage extends StatelessWidget {

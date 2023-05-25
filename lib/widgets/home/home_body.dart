@@ -4,16 +4,21 @@ import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:d_to_d/models/post.dart';
 import 'package:flutter/material.dart';
 
+enum Filter {
+  developer,
+  designer,
+}
+
 class HomeBody extends StatefulWidget {
-  const HomeBody({super.key});
+  final Filter? filter;
+
+  const HomeBody({super.key, this.filter});
 
   @override
   State<HomeBody> createState() => _HomeBodyState();
 }
 
 class _HomeBodyState extends State<HomeBody> {
-  final ScrollController _controller = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,13 +36,24 @@ class _HomeBodyState extends State<HomeBody> {
               minItemWidth: 300,
               gridItems: List.generate(
                 posts.length,
-                (index) => HomeCard(
-                  id: posts[index].id,
-                  title: posts[index].title,
-                  type: posts[index].category,
-                  name: posts[index].writer,
-                  imgURL: posts[index].image,
-                ),
+                (index) {
+                  if (widget.filter == Filter.developer) {
+                    if (posts[index].category != 'developer') {
+                      return SizedBox();
+                    }
+                  } else if (widget.filter == Filter.designer) {
+                    if (posts[index].category != 'designer') {
+                      return SizedBox();
+                    }
+                  }
+                  return HomeCard(
+                    id: posts[index].id,
+                    title: posts[index].title,
+                    type: posts[index].category,
+                    name: posts[index].writer,
+                    imgURL: posts[index].image,
+                  );
+                },
               ),
               builder: (context, items) {
                 return RefreshIndicator(

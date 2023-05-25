@@ -33,12 +33,14 @@ class AppRouter {
               child: HomeBody(),
             ),
           ),
-          // GoRoute(
-          //   path: '/developer',
-          //   pageBuilder: (context, state) => NoTransitionPage(
-          //     child: ,
-          //   ),
-          // ),
+          GoRoute(
+            path: '/developer',
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: HomeBody(
+                filter: Filter.developer,
+              ),
+            ),
+          ),
           GoRoute(
             path: '/addpost',
             pageBuilder: (context, state) => CustomTransitionPage(
@@ -54,32 +56,31 @@ class AppRouter {
               ),
             ),
           ),
-          // GoRoute(
-          //   path: '/designer',
-          //   pageBuilder: (context, state) => NoTransitionPage(
-          //     child: ,
-          //   ),
-          // ),
+          GoRoute(
+            path: '/designer',
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: HomeBody(
+                filter: Filter.designer,
+              ),
+            ),
+          ),
           GoRoute(
             path: '/setting',
             pageBuilder: (context, state) => NoTransitionPage(
               child: SettingPage(),
             ),
           ),
-          GoRoute(
-            path: '/post',
-            builder: (context, state) {
-              final postId = state.queryParameters['postid'];
-              if (postId == null) {
-                throw Exception('postId is null');
-              }
-              return MobilePost(postId: postId);
-            }
-            // pageBuilder: (context, state) => NoTransitionPage(
-            //   child: MobilePost(),
-            // ),
-          ),
         ],
+      ),
+      GoRoute(
+        path: '/post',
+        builder: (context, state) {
+          final postId = state.queryParameters['postid'];
+          if (postId == null) {
+            throw Exception('postId is null');
+          }
+          return MobilePost(postId: postId);
+        },
       ),
     ],
   );

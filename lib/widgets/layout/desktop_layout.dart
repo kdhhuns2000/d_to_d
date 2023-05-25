@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:d_to_d/widgets/home/home_body.dart';
 import 'package:d_to_d/widgets/home/side_bar.dart';
+import 'package:d_to_d/widgets/home/home_search_bar.dart';
 
 class DesktopLayout extends StatelessWidget {
   final Widget child;
@@ -29,7 +30,7 @@ class DesktopLayout extends StatelessWidget {
                 ),
               ),
             ),
-            SearchBar(),
+            HomeSearchBar(),
           ],
         ),
         backgroundColor: Colors.white,

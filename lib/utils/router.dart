@@ -54,12 +54,12 @@ class AppRouter {
               ),
             ),
           ),
-          // GoRoute(
-          //   path: '/designer',
-          //   pageBuilder: (context, state) => NoTransitionPage(
-          //     child: ,
-          //   ),
-          // ),
+          GoRoute(
+              path: '/addpost2',
+              builder: (context, state) {
+                return AddPost();
+              }),
+
           GoRoute(
             path: '/setting',
             pageBuilder: (context, state) => NoTransitionPage(
@@ -67,18 +67,18 @@ class AppRouter {
             ),
           ),
           GoRoute(
-            path: '/post',
-            builder: (context, state) {
-              final postId = state.queryParameters['postid'];
-              if (postId == null) {
-                throw Exception('postId is null');
+              path: '/post',
+              builder: (context, state) {
+                final postId = state.queryParameters['postid'];
+                if (postId == null) {
+                  throw Exception('postId is null');
+                }
+                return MobilePost(postId: postId);
               }
-              return MobilePost(postId: postId);
-            }
-            // pageBuilder: (context, state) => NoTransitionPage(
-            //   child: MobilePost(),
-            // ),
-          ),
+              // pageBuilder: (context, state) => NoTransitionPage(
+              //   child: MobilePost(),
+              // ),
+              ),
         ],
       ),
     ],

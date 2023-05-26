@@ -10,14 +10,21 @@ class User {
   static final User _instance = User._internal();
 
   factory User({
-    int? id,
-    String? userId,
-    String? password,
-    String? category,
+    required int id,
+    required String userId,
+    required String password,
+    required String category,
     String? nickname,
     String? profileImage,
     List<String>? posts,
   }) {
+    _instance.id = id;
+    _instance.userId = userId;
+    _instance.password = password;
+    _instance.category = category;
+    _instance.nickname = nickname;
+    _instance.profileImage = profileImage;
+    _instance.posts = posts;
     return _instance;
   }
 
@@ -33,5 +40,9 @@ class User {
       profileImage: jsonData['profileImage'],
       posts: List<String>.from(jsonData['posts']),
     );
+  }
+
+  static User getInstance() {
+    return _instance;
   }
 }

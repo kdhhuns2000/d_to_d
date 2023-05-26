@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:d_to_d/models/user.dart';
 import 'package:d_to_d/models/post.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Service {
   static final _dio = Dio(
@@ -73,5 +75,34 @@ class Service {
     } catch (e) {
       throw Exception(e);
     }
+  }
+
+  static Future<bool> addPost(int userId, String title, String content,
+      String category, String filePath) async {
+    try {
+      final postCreateRequestDto = jsonEncode({
+        'userId': userId,
+        'title': title,
+        'content': content,
+        'category': category,
+      });
+
+      final formData = FormData.fromMap({
+        'postCreateRequestDto': postCreateRequestDto,
+        'file': MultipartFile.fromFileSync(filePath)
+      });
+      Response response = await _dio.post('/posts', data: formData);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static User getUser123() {
+    return User.getInstance();
   }
 }

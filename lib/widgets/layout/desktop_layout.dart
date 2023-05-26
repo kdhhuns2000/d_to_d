@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:d_to_d/widgets/home/home_body.dart';
 import 'package:d_to_d/widgets/home/side_bar.dart';
 
 class DesktopLayout extends StatelessWidget {
@@ -50,7 +49,7 @@ class DesktopLayout extends StatelessWidget {
           ),
           Expanded(
             flex: 5,
-            child: HomeBody(),
+            child: child,
           ),
         ],
       ),

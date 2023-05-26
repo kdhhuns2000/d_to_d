@@ -4,9 +4,21 @@ import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:d_to_d/models/post.dart';
 import 'package:flutter/material.dart';
 
-class HomeBody extends StatelessWidget {
-  const HomeBody({super.key});
+enum Filter {
+  developer,
+  designer,
+}
 
+class HomeBody extends StatefulWidget {
+  final Filter? filter;
+
+  const HomeBody({super.key, this.filter});
+
+  @override
+  State<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,20 +30,54 @@ class HomeBody extends StatelessWidget {
             return CircularProgressIndicator();
           } else {
             List<Post> posts = snapshot.data!;
-            return ResponsiveGridList(
+            return ResponsiveGridListBuilder(
               horizontalGridMargin: 20,
               verticalGridMargin: 20,
               minItemWidth: 300,
-              children: List.generate(
+              gridItems: List.generate(
                 posts.length,
-                (index) => HomeCard(
-                  id: posts[index].id,
-                  title: posts[index].title,
-                  type: posts[index].category,
-                  name: posts[index].writer,
-                  imgURL: posts[index].image,
-                ),
+                (index) {
+                  if (widget.filter == Filter.developer) {
+                    if (posts[index].category != 'developer') {
+                      return SizedBox();
+                    }
+                  } else if (widget.filter == Filter.designer) {
+                    if (posts[index].category != 'designer') {
+                      return SizedBox();
+                    }
+                  }
+                  return HomeCard(
+                    id: posts[index].id,
+                    title: posts[index].title,
+                    type: posts[index].category,
+                    name: posts[index].writer,
+                    imgURL: posts[index].image,
+                  );
+                },
               ),
+              builder: (context, items) {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    setState(() {});
+                  },
+                  child: ListView(
+                    physics: AlwaysScrollableScrollPhysics(
+                        parent: BouncingScrollPhysics()),
+                    children: items,
+                  ),
+                );
+              },
+              // builder: (context, items) => ,
+              // children: List.generate(
+              //   posts.length,
+              //   (index) => HomeCard(
+              //     id: posts[index].id,
+              //     title: posts[index].title,
+              //     type: posts[index].category,
+              //     name: posts[index].writer,
+              //     imgURL: posts[index].image,
+              //   ),
+              // ),
             );
           }
         },

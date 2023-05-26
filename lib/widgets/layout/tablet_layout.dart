@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:d_to_d/widgets/home/home_body.dart';
 
 class TabletLayout extends StatelessWidget {
   final Widget child;
@@ -43,7 +42,7 @@ class TabletLayout extends StatelessWidget {
           )
         ],
       ),
-      body: HomeBody(),
+      body: child,
     );
   }
 }

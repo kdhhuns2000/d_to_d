@@ -55,12 +55,6 @@ class AppRouter {
             ),
           ),
           GoRoute(
-              path: '/addpost2',
-              builder: (context, state) {
-                return AddPost();
-              }),
-
-          GoRoute(
             path: '/setting',
             pageBuilder: (context, state) => NoTransitionPage(
               child: SettingPage(),

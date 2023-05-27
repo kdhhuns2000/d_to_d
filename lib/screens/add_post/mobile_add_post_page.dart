@@ -6,7 +6,6 @@ class MobileAddPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("EEEEEEEEEEEE"); // 'AddPost' 페이지에 진입했을 때 메시지 출력
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.all(16.0),

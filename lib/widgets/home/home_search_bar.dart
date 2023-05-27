@@ -100,8 +100,7 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
           SizedBox(width: 20),
           GestureDetector(
             onTap: () {
-              print("이이이이이이잉");
-              context.go('/addpost2');
+              context.go('/addpost');
             },
             child: Container(
               decoration: BoxDecoration(

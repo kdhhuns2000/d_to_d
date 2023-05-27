@@ -8,7 +8,6 @@ class AddPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Entered 'AddPost' page"); // 'AddPost' 페이지에 진입했을 때 메시지 출력
     return Column(
       children: [
         Expanded(

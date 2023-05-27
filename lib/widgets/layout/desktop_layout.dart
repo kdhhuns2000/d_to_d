@@ -51,7 +51,7 @@ class DesktopLayout extends StatelessWidget {
           ),
           Expanded(
             flex: 5,
-            child: HomeBody(),
+            child: child,
           ),
         ],
       ),

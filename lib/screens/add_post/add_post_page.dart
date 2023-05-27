@@ -1,6 +1,7 @@
 import 'package:d_to_d/models/user.dart';
 import 'package:d_to_d/utils/api/service.dart';
 import 'package:d_to_d/widgets/image_upload.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
@@ -53,7 +54,7 @@ class _AddPostState extends ConsumerState<AddPost> {
             // onPressed: () => print(user.id),
             onPressed: () {
               if (imageState != null) {
-                post(imageState.path);
+                post(imageState);
               }
             },
             child: Text('게시'),
@@ -63,13 +64,13 @@ class _AddPostState extends ConsumerState<AddPost> {
     );
   }
 
-  Future<void> post(String filePath) async {
+  Future<void> post(Uint8List bytes) async {
     bool result = await Service.addPost(
       user.id,
       _titleController.text,
       _contentController.text,
       user.category,
-      filePath,
+      bytes,
     );
     if (result) {
       context.pop();

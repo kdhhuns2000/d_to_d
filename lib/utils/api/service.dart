@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:d_to_d/models/user.dart';
 import 'package:d_to_d/models/post.dart';
+import 'package:uuid/uuid.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Service {
@@ -78,7 +80,7 @@ class Service {
   }
 
   static Future<bool> addPost(int userId, String title, String content,
-      String category, String filePath) async {
+      String category, Uint8List bytes) async {
     try {
       final postCreateRequestDto = jsonEncode({
         'userId': userId,
@@ -86,10 +88,10 @@ class Service {
         'content': content,
         'category': category,
       });
-
+      final uuid = Uuid();
       final formData = FormData.fromMap({
         'postCreateRequestDto': postCreateRequestDto,
-        'file': MultipartFile.fromFileSync(filePath)
+        'file': MultipartFile.fromBytes(bytes, filename: uuid.v4()),
       });
       Response response = await _dio.post('/posts', data: formData);
       if (response.statusCode == 200) {

@@ -1,30 +1,29 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:d_to_d/utils/constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-final imageFileStateProvider = StateProvider<XFile?>((ref) => null);
+final imageFileStateProvider = StateProvider<Uint8List?>((ref) => null);
 
 class ImageUpload extends ConsumerWidget {
   const ImageUpload({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    XFile? imageFile;
+    // XFile? imageFile;
+    Uint8List? bytes;
     final imageState = ref.watch(imageFileStateProvider);
     return GestureDetector(
       onTap: () async {
-        imageFile = await pickFile();
-        if (imageFile != null) {
-          ref.read(imageFileStateProvider.notifier).state = imageFile;
+        bytes = await pickFile();
+        if (bytes != null) {
+          ref.read(imageFileStateProvider.notifier).state = bytes;
         }
       },
       child: imageState != null
-          // ? Image.memory(imageState.bytes!)
-          ? Image.file(File(imageState.path))
+          ? Image.memory(imageState)
           : DottedBorder(
               dashPattern: [8, 8],
               strokeWidth: 2,
@@ -53,11 +52,12 @@ class ImageUpload extends ConsumerWidget {
     );
   }
 
-  Future<XFile?> pickFile() async {
+  Future<Uint8List?> pickFile() async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      return pickedFile;
+      return pickedFile.readAsBytes();
     }
+    return null;
   }
 }

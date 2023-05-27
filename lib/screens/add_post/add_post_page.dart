@@ -1,6 +1,7 @@
 import 'package:d_to_d/models/user.dart';
 import 'package:d_to_d/utils/api/service.dart';
 import 'package:d_to_d/widgets/image_upload.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
@@ -33,24 +34,5 @@ class _AddPostState extends ConsumerState<AddPost> {
         ),
       ],
     );
-  }
-
-  Future<void> post(String filePath) async {
-    bool result = await Service.addPost(
-      user.id,
-      _titleController.text,
-      _contentController.text,
-      user.category,
-      filePath,
-    );
-    if (result) {
-      context.pop();
-    } else {
-      Fluttertoast.showToast(
-        msg: '문제가 발생했습니다.',
-        gravity: ToastGravity.BOTTOM,
-        toastLength: Toast.LENGTH_SHORT,
-      );
-    }
   }
 }

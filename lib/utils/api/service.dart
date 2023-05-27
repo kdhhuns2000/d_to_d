@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:d_to_d/models/message.dart';
 import 'package:dio/dio.dart';
 import 'package:d_to_d/models/user.dart';
 import 'package:d_to_d/models/post.dart';
 import 'package:uuid/uuid.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Service {
   static final _dio = Dio(
@@ -104,7 +104,101 @@ class Service {
     }
   }
 
+  static Future<int> createMessage(
+      int requestUserId, int responseUserId) async {
+    try {
+      final createMessageDto = jsonEncode({
+        'requestUserId': requestUserId,
+        'responseUserId': responseUserId,
+      });
+
+      Response response = await _dio.post('/message', data: createMessageDto);
+
+      if (response.data['code'] == 200) {
+        int id = response.data['result']['id'];
+        return id;
+      } else {
+        return 0;
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<String> deleteMessage(int id) async {
+    try {
+      Response response = await _dio.delete('/message', data: id);
+
+      if (response.data['code'] == 200) {
+        return "ok";
+      } else {
+        return "fail";
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<List<Message>> getMessages(int id) async {
+    List<Message> msgList = [];
+    try {
+      Response response = await _dio.get('/message/all?id=$id');
+
+      print(response.data['result']['messages']);
+      print(response.data['result']['messages'][0]['requestUserId']);
+      print(response.data['result']['messages'][0]['responseUserId']);
+      print(response.data['result']['messages'][1]['requestUserId']);
+      print(response.data['result']['messages'][1]['responseUserId']);
+      for (var m in response.data['result']['messages']) {
+        print(m);
+        print(m['requestUserId']);
+        print(User.getInstance().id);
+        int id;
+        if (m['requestUserId'] == User.getInstance().id) {
+          id = m['responseUserId'];
+          print(id);
+          response = await _dio.get(
+            '/users/profile/$id',
+            options: Options(responseType: ResponseType.json),
+          );
+        } else {
+          id = m['requestUserId'];
+          print(id);
+          response = await _dio.get(
+            '/users/profile/$id',
+            options: Options(responseType: ResponseType.json),
+          );
+        }
+        msgList.add(Message(
+          id: m['id'],
+          targetUserId: response.data['result']['id'].toString(),
+          targetUserName: response.data['result']['nickname'].toString(),
+          targetUserCategory: response.data['result']['category'].toString(),
+        ));
+
+        print(msgList);
+      }
+
+      return msgList;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   static User getUser123() {
     return User.getInstance();
   }
+}
+
+class GetMessageDto {
+  int id;
+  String userId;
+  String userNickname;
+  String userCategory;
+
+  GetMessageDto(
+      {required this.id,
+      required this.userId,
+      required this.userNickname,
+      required this.userCategory});
 }

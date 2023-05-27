@@ -1,6 +1,7 @@
 import 'package:d_to_d/utils/api/service.dart';
 import 'package:flutter/material.dart';
 import 'package:d_to_d/models/post.dart';
+import 'package:go_router/go_router.dart';
 
 class MobilePost extends StatefulWidget {
   final String postId;
@@ -83,7 +84,10 @@ class _MobilePostState extends State<MobilePost> {
                       ],
                     ),
                     TextButton(
-                      onPressed: () => {},
+                      onPressed: () => {
+                        context.go(
+                            '/message/room?roomId=${post.userId}&targetUserName=${post.writer}')
+                      },
                       child: Text(
                         'CONNECT',
                         style: TextStyle(

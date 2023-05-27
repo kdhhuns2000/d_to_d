@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:d_to_d/screens/add_post/mobile_add_post_page.dart';
+import 'package:d_to_d/screens/add_post/desktop_add_post_page.dart';
+import 'package:d_to_d/widgets/responsive/responsive_layout.dart';
 
 class AddPost extends ConsumerStatefulWidget {
   const AddPost({super.key});
@@ -20,46 +23,15 @@ class _AddPostState extends ConsumerState<AddPost> {
 
   @override
   Widget build(BuildContext context) {
-    final imageState = ref.watch(imageFileStateProvider);
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(16.0),
-      child: ListView(
-        children: [
-          TextField(
-            controller: _titleController,
-            decoration: InputDecoration(
-              hintText: '제목',
-            ),
+    return Column(
+      children: [
+        Expanded(
+          child: ResponsiveLayout(
+            mobileBody: MobileAddPost(),
+            desktopBody: DesktopAddPost(),
           ),
-          SizedBox(height: 16),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 30.0,
-              horizontal: MediaQuery.of(context).size.width * 0.05,
-            ),
-            child: ImageUpload(),
-          ),
-          TextField(
-            controller: _contentController,
-            minLines: 5,
-            maxLines: 100,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: '내용을 입력하세요',
-            ),
-          ),
-          ElevatedButton(
-            // onPressed: () => print(user.id),
-            onPressed: () {
-              if (imageState != null) {
-                post(imageState.path);
-              }
-            },
-            child: Text('게시'),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

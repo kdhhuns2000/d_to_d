@@ -5,7 +5,6 @@ class User {
   late String category;
   String? nickname;
   String? profileImage;
-  List<String>? posts;
 
   static final User _instance = User._internal();
 
@@ -16,7 +15,6 @@ class User {
     required String category,
     String? nickname,
     String? profileImage,
-    List<String>? posts,
   }) {
     _instance.id = id;
     _instance.userId = userId;
@@ -24,7 +22,6 @@ class User {
     _instance.category = category;
     _instance.nickname = nickname;
     _instance.profileImage = profileImage;
-    _instance.posts = posts;
     return _instance;
   }
 
@@ -38,7 +35,6 @@ class User {
       nickname: jsonData['nickname'],
       category: jsonData['category'],
       profileImage: jsonData['profileImage'],
-      posts: List<String>.from(jsonData['posts']),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ExampleItem {
   final String title;
@@ -95,7 +96,30 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
                     ),
                   ),
                 ),
-              ))
+              )),
+          SizedBox(width: 20),
+          GestureDetector(
+            onTap: () {
+              context.go('/addpost');
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              width: 80,
+              height: 35,
+              child: Center(
+                child: Text(
+                  '글쓰기',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

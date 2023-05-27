@@ -144,20 +144,36 @@ class Service {
     try {
       Response response = await _dio.get('/message/all?id=$id');
 
-      for (var m in response.data['result']) {
-        User? user;
-        if (m['requestUserId'] == User.getInstance().id.toString()) {
-          user =
-              await getUser(m['responseUserId'] as int).then((value) => value);
+      print(response.data['result']['messages']);
+      print(response.data['result']['messages'][0]['requestUserId']);
+      print(response.data['result']['messages'][0]['responseUserId']);
+      print(response.data['result']['messages'][1]['requestUserId']);
+      print(response.data['result']['messages'][1]['responseUserId']);
+      for (var m in response.data['result']['messages']) {
+        print(m);
+        print(m['requestUserId']);
+        print(User.getInstance().id);
+        int id;
+        if (m['requestUserId'] == User.getInstance().id) {
+          id = m['responseUserId'];
+          print(id);
+          response = await _dio.get(
+            '/users/profile/$id',
+            options: Options(responseType: ResponseType.json),
+          );
         } else {
-          user =
-              await getUser(m['requestUserId'] as int).then((value) => value);
+          id = m['requestUserId'];
+          print(id);
+          response = await _dio.get(
+            '/users/profile/$id',
+            options: Options(responseType: ResponseType.json),
+          );
         }
         msgList.add(Message(
           id: m['id'],
-          targetUserId: user!.userId.toString(),
-          targetUserName: user.nickname.toString(),
-          targetUserCategory: user.category.toString(),
+          targetUserId: response.data['result']['id'].toString(),
+          targetUserName: response.data['result']['nickname'].toString(),
+          targetUserCategory: response.data['result']['category'].toString(),
         ));
 
         print(msgList);
@@ -174,10 +190,15 @@ class Service {
   }
 }
 
-class GetUserDto {
+class GetMessageDto {
   int id;
-  int userid;
-  String username;
+  String userId;
+  String userNickname;
+  String userCategory;
 
-  GetUserDto({required this.id, required this.userid, required this.username});
+  GetMessageDto(
+      {required this.id,
+      required this.userId,
+      required this.userNickname,
+      required this.userCategory});
 }

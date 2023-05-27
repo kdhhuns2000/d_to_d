@@ -84,13 +84,13 @@ class AppRouter {
           GoRoute(
               path: '/message/room',
               builder: (context, state) {
-                final targetUserId = state.queryParameters['targetUserId'];
+                final roomId = state.queryParameters['roomId'];
                 final targetUserName = state.queryParameters['targetUserName'];
-                if (targetUserId == null || targetUserName == null) {
+                if (roomId == null || targetUserName == null) {
                   throw Exception('requset is null');
                 }
                 return MessageScreen(
-                    targetUserId: targetUserId, targetUserName: targetUserName);
+                    roomId: roomId, targetUserName: targetUserName);
               }),
           GoRoute(
               path: '/message',

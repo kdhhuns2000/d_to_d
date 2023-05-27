@@ -13,7 +13,6 @@ class MessageListScreen extends StatefulWidget {
 
 class _MessageListScreenState extends State<MessageListScreen> {
   final myId = User.getInstance().id;
-  List<Message> chatList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +24,18 @@ class _MessageListScreenState extends State<MessageListScreen> {
               if (!snapshot.hasData | snapshot.hasError) {
                 return CircularProgressIndicator();
               } else {
-                chatList = snapshot.data!;
+                List<Message> chatList = snapshot.data!;
+                print(chatList);
                 return ListView.builder(
                     itemCount: chatList.length,
                     itemBuilder: (context, index) {
                       final chat = chatList[index];
-                      ListTile(
+                      return ListTile(
                         title: Text(chat.targetUserName),
                         trailing: Text(chat.targetUserCategory),
-                        onTap: () {
+                        onTap: () => {
                           context.go(
-                              'message/room?targetUserId=${chat.targetUserId}&targetUserName=${chat.targetUserName}');
+                              '/message/room?roomId=${chat.id}&targetUserName=${chat.targetUserName}')
                         },
                       );
                     });

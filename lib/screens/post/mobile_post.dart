@@ -86,7 +86,7 @@ class _MobilePostState extends State<MobilePost> {
                     TextButton(
                       onPressed: () => {
                         context.go(
-                            '/message/room?targetUserId=${post.userId}&targetUserName=${post.writer}')
+                            '/message/room?roomId=${post.userId}&targetUserName=${post.writer}')
                       },
                       child: Text(
                         'CONNECT',

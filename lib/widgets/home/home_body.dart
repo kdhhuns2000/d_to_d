@@ -30,31 +30,30 @@ class _HomeBodyState extends State<HomeBody> {
             return CircularProgressIndicator();
           } else {
             List<Post> posts = snapshot.data!;
+            List<Widget> gridItems = List.empty(growable: true);
+            for (var post in posts) {
+              if (widget.filter == Filter.developer) {
+                if (post.category != 'developer') {
+                  continue;
+                }
+              } else if (widget.filter == Filter.designer) {
+                if (post.category != 'designer') {
+                  continue;
+                }
+              }
+              gridItems.add(HomeCard(
+                id: post.id,
+                title: post.title,
+                type: post.category,
+                name: post.writer,
+                imgURL: post.image,
+              ));
+            }
             return ResponsiveGridListBuilder(
               horizontalGridMargin: 20,
               verticalGridMargin: 20,
               minItemWidth: 300,
-              gridItems: List.generate(
-                posts.length,
-                (index) {
-                  if (widget.filter == Filter.developer) {
-                    if (posts[index].category != 'developer') {
-                      return SizedBox();
-                    }
-                  } else if (widget.filter == Filter.designer) {
-                    if (posts[index].category != 'designer') {
-                      return SizedBox();
-                    }
-                  }
-                  return HomeCard(
-                    id: posts[index].id,
-                    title: posts[index].title,
-                    type: posts[index].category,
-                    name: posts[index].writer,
-                    imgURL: posts[index].image,
-                  );
-                },
-              ),
+              gridItems: gridItems,
               builder: (context, items) {
                 return RefreshIndicator(
                   onRefresh: () async {
@@ -67,34 +66,9 @@ class _HomeBodyState extends State<HomeBody> {
                   ),
                 );
               },
-              // builder: (context, items) => ,
-              // children: List.generate(
-              //   posts.length,
-              //   (index) => HomeCard(
-              //     id: posts[index].id,
-              //     title: posts[index].title,
-              //     type: posts[index].category,
-              //     name: posts[index].writer,
-              //     imgURL: posts[index].image,
-              //   ),
-              // ),
             );
           }
         },
-        // child: ResponsiveGridList(
-        //   horizontalGridMargin: 20,
-        //   verticalGridMargin: 20,
-        //   minItemWidth: 300,
-        //   children: List.generate(
-        //     100,
-        //     (index) => HomeCard(
-        //         id: index,
-        //         title: "같이 코딩할 사람",
-        //         type: "Designer",
-        //         name: "류관곤",
-        //         imgURL: ""),
-        //   ),
-        // ),
       ),
     );
   }

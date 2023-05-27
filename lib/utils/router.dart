@@ -1,4 +1,6 @@
 import 'package:d_to_d/screens/login/login_page.dart';
+import 'package:d_to_d/screens/message/msg_list.dart';
+import 'package:d_to_d/screens/message/msg_scr.dart';
 import 'package:d_to_d/screens/post/mobile_post.dart';
 import 'package:d_to_d/widgets/home/home_body.dart';
 import 'package:flutter/material.dart';
@@ -70,17 +72,32 @@ class AppRouter {
               child: SettingPage(),
             ),
           ),
+          GoRoute(
+              path: '/post',
+              builder: (context, state) {
+                final postId = state.queryParameters['postid'];
+                if (postId == null) {
+                  throw Exception('postId is null');
+                }
+                return MobilePost(postId: postId);
+              }),
+          GoRoute(
+              path: '/message/room',
+              builder: (context, state) {
+                final targetUserId = state.queryParameters['targetUserId'];
+                final targetUserName = state.queryParameters['targetUserName'];
+                if (targetUserId == null || targetUserName == null) {
+                  throw Exception('requset is null');
+                }
+                return MessageScreen(
+                    targetUserId: targetUserId, targetUserName: targetUserName);
+              }),
+          GoRoute(
+              path: '/message',
+              builder: (context, state) {
+                return MessageListScreen();
+              }),
         ],
-      ),
-      GoRoute(
-        path: '/post',
-        builder: (context, state) {
-          final postId = state.queryParameters['postid'];
-          if (postId == null) {
-            throw Exception('postId is null');
-          }
-          return MobilePost(postId: postId);
-        },
       ),
     ],
   );

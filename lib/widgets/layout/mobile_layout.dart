@@ -67,7 +67,9 @@ class _MobileLayoutState extends State<MobileLayout>
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.go('/message');
+            },
             icon: Image.asset("assets/icons/alarm.png"),
             iconSize: 24,
           ),
